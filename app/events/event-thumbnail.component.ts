@@ -4,13 +4,13 @@ import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core
     selector: 'event-thumbnail',
     template: `
         <div class='well hoverwell thumbnail'>
-            <h2>{{ event.name }}</h2>
-            <div>Date: {{ event.date }}</div>
-            <div>Time: {{ event.time }}</div>
-            <div>Price: {{ event.price | currency: 'USD': true }}</div>
-            <div>
-                <span>Location: {{ event.location.address }}</span>
-                <span class='pad-left'>{{ event.location.city }}, {{ event.location.country }}</span>
+            <h2>{{ event?.name }}</h2>
+            <div>Date: {{ event?.date }}</div>
+            <div>Time: {{ event?.time }}</div>
+            <div>Price: {{ event?.price | currency: 'USD': true }}</div>
+            <div [hidden]='!event?.location'>
+                <span>Location: {{ event?.location?.address }}</span>
+                <span class='pad-left'>{{ event?.location?.city }}, {{ event?.location?.country }}</span>
             </div>
 
             <!-- <button class='btn btn-primary' (click)='handleClickMe()'>Click me</button> -->

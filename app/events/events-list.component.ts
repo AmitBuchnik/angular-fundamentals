@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
         <div>
             <h1>Upcoming Angular 2 Events</h1>
             <hr/>
-            <event-thumbnail *ngFor='let event of events' [event]='event'></event-thumbnail>
-
+            <div class='row'>
+                <div class='col-md-5' *ngFor='let event of events'>
+                    <event-thumbnail [event]='event'></event-thumbnail>
+                </div>    
+            </div>
             <!--
                 <event-thumbnail [event]='event1' (eventClick)='handleEventClicked($event)'></event-thumbnail>
             -->            
@@ -28,11 +31,11 @@ export class EventsListComponent {
             time: '10:00 am',
             price: 599.99,
             imageUrl: '/app/assets/images/angularconnect-shield.png',
-            location: {
-                address: '1057 DT',
-                city: 'London',
-                country: 'England'
-            },
+            // location: {
+            //     address: '1057 DT',
+            //     city: 'London',
+            //     country: 'England'
+            // },
             sessions: [
                 {
                     id: 1,
