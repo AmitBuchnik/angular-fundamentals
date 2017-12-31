@@ -11,6 +11,8 @@ import { ToastrService } from "./common/toastr.service";
 import { EventDetailsComponent } from "./events/event-details/event-details.component";
 import { appRoutes } from "./routes";
 import { EventCreateComponent } from "./events/event-create.component";
+import { Error404Component } from "./errors/404.component";
+import { EventRouteActivator } from "./events/event-details/event-route-activator.service";
 
 @NgModule({
     declarations: [
@@ -19,7 +21,8 @@ import { EventCreateComponent } from "./events/event-create.component";
         EventThumbnailComponent,
         NavbarComponent,
         EventDetailsComponent,
-        EventCreateComponent
+        EventCreateComponent,
+        Error404Component
     ],
     imports: [
         BrowserModule,
@@ -27,8 +30,20 @@ import { EventCreateComponent } from "./events/event-create.component";
     ],
     providers: [
         EventService,
-        ToastrService
+        ToastrService,
+        EventRouteActivator,
+        // {
+        //     provide: 'canDeactivateCreateEvent',
+        //     useValue: checkDirtyState
+        // }
     ],
     bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
+
+// function checkDirtyState(component: EventCreateComponent) {
+//     if (component.isDirty) {        
+//         return window.confirm(`You have not saved this event, do you want to cancel?`);
+//     }
+//     return true;
+// }
