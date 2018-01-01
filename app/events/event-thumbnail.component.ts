@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import { IEvent } from './index';
 
 @Component({
     selector: 'event-thumbnail',
@@ -13,28 +14,28 @@ import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core
                 <span *ngSwitchDefault>(Normal Start)</span>
             </div>
             <!--
-            <div [style.color]="event?.time === '8:00 am' ? '#003300': '#bbb'" [ngSwitch]='event?.time'>
-                Time: {{ event?.time }}
-                <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
-                <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
-                <span *ngSwitchDefault>(Normal Start)</span>
-            </div>     
+                <div [style.color]="event?.time === '8:00 am' ? '#003300': '#bbb'" [ngSwitch]='event?.time'>
+                    Time: {{ event?.time }}
+                    <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+                    <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+                    <span *ngSwitchDefault>(Normal Start)</span>
+                </div>     
             -->   
             <!--
-            <div [ngClass]="getStartTimeClass()" [ngSwitch]='event?.time'>
-                Time: {{ event?.time }}
-                <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
-                <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
-                <span *ngSwitchDefault>(Normal Start)</span>
-            </div>    
+                <div [ngClass]="getStartTimeClass()" [ngSwitch]='event?.time'>
+                    Time: {{ event?.time }}
+                    <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+                    <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+                    <span *ngSwitchDefault>(Normal Start)</span>
+                </div>    
             -->
             <!--
-            <div [class.green]="event?.time === '8:00 am'" [ngSwitch]='event?.time'>
-                Time: {{ event?.time }}
-                <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
-                <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
-                <span *ngSwitchDefault>(Normal Start)</span>
-            </div>
+                <div [class.green]="event?.time === '8:00 am'" [ngSwitch]='event?.time'>
+                    Time: {{ event?.time }}
+                    <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+                    <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+                    <span *ngSwitchDefault>(Normal Start)</span>
+                </div>
             -->               
             <div>Price: {{ event?.price | currency: 'USD': true }}</div>
             <div [hidden]='!event?.location'>
@@ -52,8 +53,8 @@ import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core
     //     .well div { color: #bbb; }
     // `]
 })
-export class EventThumbnailComponent extends OnChanges {
-    @Input() event: any;
+export class EventThumbnailComponent implements OnChanges {
+    @Input() event: IEvent;
     // someProperty: string = 'some value';
     // @Output() eventClick = new EventEmitter();
 
