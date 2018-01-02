@@ -37,7 +37,7 @@ import { IEvent } from './index';
                     <span *ngSwitchDefault>(Normal Start)</span>
                 </div>
             -->               
-            <div>Price: {{ event?.price | currency: 'USD': true }}</div>
+            <div>Price: {{ event?.price | currency: 'USD': 'symbol' }}</div>
             <div [hidden]='!event?.location'>
                 <span>Location: {{ event?.location?.address }}</span>
                 <span class='pad-left'>{{ event?.location?.city }}, {{ event?.location?.country }}</span>
