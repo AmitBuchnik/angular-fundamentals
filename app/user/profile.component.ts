@@ -24,12 +24,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  cancel(): void {
+  saveProfile(formValues): void {
+    this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
     this.router.navigate(['/events']);
   }
 
-  saveProfile(formValues): void {
-    this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+  cancel(): void {
     this.router.navigate(['/events']);
   }
 }
