@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { EventService, IEvent } from './shared/index';
@@ -14,11 +14,15 @@ import { EventService, IEvent } from './shared/index';
         .error ::-ms-input-placeholder { color: #999 }
   `]
 })
-export class EventCreateComponent {
+export class EventCreateComponent implements OnInit {    
     isDirty: boolean = true;
 
     constructor(private router: Router, private eventService: EventService) {
 
+    }
+
+    ngOnInit(): void {
+        
     }
 
     saveEvent(event: IEvent): void {
