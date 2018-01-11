@@ -10,6 +10,7 @@ import {
     EventThumbnailComponent,
     EventDetailsComponent,
     EventCreateComponent,
+    CreateSessionComponent,
     EventService,
     EventRouteActivator,
     EventsListResolver
@@ -29,7 +30,8 @@ import { AuthService } from "./user/auth.service";
         NavbarComponent,
         EventDetailsComponent,
         EventCreateComponent,
-        Error404Component
+        Error404Component,
+        CreateSessionComponent
     ],
     imports: [
         BrowserModule,
