@@ -5,7 +5,7 @@ export function restrictedWords(words) {
         if (!words) {
             return null;
         }
-
+        
         let invalidWords = words
             .map(w => control.value.includes(w) ? w : null)
             .filter(w => w != null);
