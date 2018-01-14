@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ISession } from '../index';
+import { ISession, restrictedWords } from '../index';
 
 @Component({
     templateUrl: 'app/events/event-details/create-session.component.html',
@@ -32,7 +32,7 @@ export class CreateSessionComponent implements OnInit {
         this.presenter = new FormControl('', Validators.required);
         this.duration = new FormControl('', Validators.required);
         this.level = new FormControl('', Validators.required);
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400)]);
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords(['puptiz', 'html'])]);
 
         this.newSessionForm = new FormGroup({
             name: this.name,
@@ -42,7 +42,7 @@ export class CreateSessionComponent implements OnInit {
             abstract: this.abstract,
         });
     }
-
+        
     saveSession(formValues): void {
         let session: ISession = {
             id: undefined,
