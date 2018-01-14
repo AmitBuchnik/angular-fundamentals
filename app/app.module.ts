@@ -13,7 +13,8 @@ import {
     CreateSessionComponent,
     EventService,
     EventRouteActivator,
-    EventsListResolver
+    EventsListResolver,
+    SessionListComponent
 } from "./events/index";
 
 import { NavbarComponent } from "./nav/navbar.component";
@@ -31,7 +32,8 @@ import { AuthService } from "./user/auth.service";
         EventDetailsComponent,
         EventCreateComponent,
         Error404Component,
-        CreateSessionComponent
+        CreateSessionComponent,
+        SessionListComponent
     ],
     imports: [
         BrowserModule,

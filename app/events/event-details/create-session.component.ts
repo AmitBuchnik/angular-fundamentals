@@ -53,6 +53,9 @@ export class CreateSessionComponent implements OnInit {
             abstract: formValues.abstract,
             voters: []
         };
+
+        console.log(session);
+        this.router.navigate(['/events']);
     }
 
     cancel(): void {

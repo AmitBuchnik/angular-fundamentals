@@ -2,9 +2,8 @@
   <h3>Create Session</h3>
 </div>
 <div class="col-md-6">
-  <form autocomplete="off"
-    [formGroup]="newSessionForm"
-    (ngSubmit)="saveSession(newSessionform.value)"
+  <form [formGroup]="newSessionForm"
+    (ngSubmit)="saveSession(newSessionForm.value)"
     autocomplete="off">
     <div class="form-group"
       [ngClass]="{ 'error': name.invalid && name.dirty }">
