@@ -5,8 +5,8 @@ import { IEvent } from './index';
     selector: 'event-thumbnail',
     template: `
         <div class='well hoverwell thumbnail' [routerLink]="['/events', event?.id]">
-            <h2>{{ event?.name }}</h2>
-            <div>Date: {{ event?.date }}</div>
+            <h2>{{ event?.name | uppercase }}</h2>
+            <div>Date: {{ event?.date | date:'shortDate' }}</div>
             <div [ngStyle]="getStartTimeStyle()" [ngSwitch]='event?.time'>
                 Time: {{ event?.time }}
                 <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
