@@ -10,15 +10,17 @@ import { IEvent, ISession } from '../index';
         .container { padding: 0px 20px;}
         .event-image { height: 100px;}
         a { cursor: pointer; }
+        .active {  }
     `]
 })
 export class EventDetailsComponent implements OnInit {
     addMode: boolean = false;
     event: IEvent;
+    filterBy: string = "all";
 
     constructor(private eventservice: EventService,
         private route: ActivatedRoute) {
-    
+
     }
 
     ngOnInit(): void {
