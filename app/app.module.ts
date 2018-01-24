@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { EventsAppComponent } from "./events-app.component";
 
-import { 
+import {
     EventsListComponent,
     EventThumbnailComponent,
     EventDetailsComponent,
@@ -49,16 +49,13 @@ declare let toastr: IToastr;
     ],
     providers: [
         EventService,
-        {
-            provide: TOASTR_TOKEN,
-            useValue: toastr
-        },
+        { provide: TOASTR_TOKEN, useValue: toastr },
         EventRouteActivator,
         // {
         //     provide: 'canDeactivateCreateEvent',
         //     useValue: checkDirtyState
         // }
-        EventsListResolver,
+        { provide: EventsListResolver, useClass: EventsListResolver },
         AuthService
     ],
     bootstrap: [EventsAppComponent]
