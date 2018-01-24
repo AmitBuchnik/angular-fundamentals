@@ -18,14 +18,20 @@ import {
     DurationPipe
 } from "./events/index";
 
+import {
+    JQUERY_TOKEN,
+    TOASTR_TOKEN,
+    IToastr,
+    CollapsibleWellComponent
+} from "./common/index";
+
 import { NavbarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
 import { Error404Component } from "./errors/404.component";
-import { TOASTR_TOKEN, IToastr } from "./common/toastr.service";
 import { AuthService } from "./user/auth.service";
-import { CollapsibleWellComponent } from "./common/collapsible-well.component";
 
 declare let toastr: IToastr;
+declare let jQuery: Object;
 
 @NgModule({
     declarations: [
