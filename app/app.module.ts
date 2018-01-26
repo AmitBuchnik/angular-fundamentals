@@ -22,7 +22,8 @@ import {
     JQUERY_TOKEN,
     TOASTR_TOKEN,
     IToastr,
-    CollapsibleWellComponent
+    CollapsibleWellComponent,
+    SimpleModalComponent
 } from "./common/index";
 
 import { NavbarComponent } from "./nav/navbar.component";
@@ -45,7 +46,8 @@ declare let jQuery: Object;
         CreateSessionComponent,
         SessionListComponent,
         CollapsibleWellComponent,
-        DurationPipe
+        DurationPipe,
+        SimpleModalComponent
     ],
     imports: [
         BrowserModule,
@@ -56,6 +58,7 @@ declare let jQuery: Object;
     providers: [
         EventService,
         { provide: TOASTR_TOKEN, useValue: toastr },
+        { provide: JQUERY_TOKEN, useValue: jQuery },
         EventRouteActivator,
         // {
         //     provide: 'canDeactivateCreateEvent',
