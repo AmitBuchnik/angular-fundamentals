@@ -23,7 +23,8 @@ import {
     TOASTR_TOKEN,
     IToastr,
     CollapsibleWellComponent,
-    SimpleModalComponent
+    SimpleModalComponent,
+    ModalTriggerDirective
 } from "./common/index";
 
 import { NavbarComponent } from "./nav/navbar.component";
@@ -47,7 +48,8 @@ declare let jQuery: Object;
         SessionListComponent,
         CollapsibleWellComponent,
         DurationPipe,
-        SimpleModalComponent
+        SimpleModalComponent,
+        ModalTriggerDirective
     ],
     imports: [
         BrowserModule,
