@@ -13,5 +13,5 @@ export function restrictedWords(words) {
         return invalidWords && invalidWords.length > 0
             ? { 'restrictedWords': invalidWords }
             : null;
-    }
+    };
 }

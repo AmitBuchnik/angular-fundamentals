@@ -15,7 +15,9 @@ import {
     EventRouteActivator,
     EventsListResolver,
     SessionListComponent,
-    DurationPipe
+    DurationPipe,
+    UpvoteComponent,
+    VoterService
 } from "./events/index";
 
 import {
@@ -49,7 +51,8 @@ declare let jQuery: Object;
         CollapsibleWellComponent,
         DurationPipe,
         SimpleModalComponent,
-        ModalTriggerDirective
+        ModalTriggerDirective,
+        UpvoteComponent
     ],
     imports: [
         BrowserModule,
@@ -67,7 +70,8 @@ declare let jQuery: Object;
         //     useValue: checkDirtyState
         // }
         { provide: EventsListResolver, useClass: EventsListResolver },
-        AuthService
+        AuthService,
+        VoterService
     ],
     bootstrap: [EventsAppComponent]
 })
