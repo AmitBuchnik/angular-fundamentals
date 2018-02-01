@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpModule } from '@angular/http';
 
 import { EventsAppComponent } from "./events-app.component";
 
@@ -39,6 +40,13 @@ declare let toastr: IToastr;
 declare let jQuery: Object;
 
 @NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        RouterModule.forRoot(appRoutes)
+    ],
     declarations: [
         EventsAppComponent,
         EventsListComponent,
@@ -55,13 +63,7 @@ declare let jQuery: Object;
         ModalTriggerDirective,
         UpvoteComponent,
         LocationValidator
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot(appRoutes)
-    ],
+    ],    
     providers: [
         EventService,
         { provide: TOASTR_TOKEN, useValue: toastr },
