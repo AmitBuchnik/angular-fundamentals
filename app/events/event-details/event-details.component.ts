@@ -30,15 +30,24 @@ export class EventDetailsComponent implements OnInit {
     }
 
     resetState(): void {
-        // this.route.params.forEach((params: Params) => {
-        //     this.event = this.eventservice.getEvent(+params['id']);
-        //     this.addMode = false;
-        // });
-
-        this.route.params.subscribe((params: Params) => {
-            this.event = this.eventservice.getEvent(+params['id']);
+        this.route.data.subscribe(data => {
+            this.event = data['event'];
             this.addMode = false;
         });
+
+        // this.route.params.subscribe((params: Params) => {       
+        //     // this.eventservice.getEvent(+params['id']).subscribe((event: IEvent) => {
+        //     //     this.event = event
+        //     //     this.addMode = false;
+        //     // });
+        // });
+
+        // this.route.params.forEach((params: Params) => {
+        //     this.eventservice.getEvent(+params['id']).subscribe((event: IEvent) => {
+        //         this.event = event
+        //         this.addMode = false;
+        //     });
+        // });
     }
 
     addSession(): void {

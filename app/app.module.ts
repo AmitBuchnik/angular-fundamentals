@@ -19,7 +19,8 @@ import {
     DurationPipe,
     UpvoteComponent,
     VoterService,
-    LocationValidator
+    LocationValidator,
+    EventResolver
 } from "./events/index";
 
 import {
@@ -69,6 +70,7 @@ declare let jQuery: Object;
         { provide: TOASTR_TOKEN, useValue: toastr },
         { provide: JQUERY_TOKEN, useValue: jQuery },
         EventRouteActivator,
+        EventResolver,
         // {
         //     provide: 'canDeactivateCreateEvent',
         //     useValue: checkDirtyState

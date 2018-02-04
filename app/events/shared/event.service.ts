@@ -3,6 +3,7 @@ import { Http, Response } from "@angular/http";
 import { Subject, Observable } from 'rxjs/RX';
 
 import { IEvent, ISession } from "./index";
+import { identifierModuleUrl } from "@angular/compiler";
 
 @Injectable()
 export class EventService {
@@ -22,9 +23,11 @@ export class EventService {
         }).catch(this.handleError);
     }
 
-    getEvent(id: number): IEvent {
-        return EVENTS.find(event => event.id === id);
-    }
+    getEvent(id: number): Observable<IEvent> {
+        return this.http.get("/api/events/" + id).map((response: Response) => {
+            return <IEvent>response.json();
+        }).catch(this.handleError);
+    }identifierModuleUrl
 
     saveEvent(event: IEvent): void {
         event.id = 999;
