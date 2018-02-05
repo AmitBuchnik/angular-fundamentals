@@ -26,14 +26,6 @@ export class EventDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         //this.event = this.eventservice.getEvent(+this.route.snapshot.params['id']);
-        this.resetState();
-    }
-
-    resetState(): void {
-        this.route.data.subscribe(data => {
-            this.event = data['event'];
-            this.addMode = false;
-        });
 
         // this.route.params.subscribe((params: Params) => {       
         //     // this.eventservice.getEvent(+params['id']).subscribe((event: IEvent) => {
@@ -48,6 +40,11 @@ export class EventDetailsComponent implements OnInit {
         //         this.addMode = false;
         //     });
         // });
+
+        this.route.data.subscribe(data => {
+            this.event = data['event'];
+            this.addMode = false;
+        });
     }
 
     addSession(): void {
