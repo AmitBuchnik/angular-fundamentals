@@ -14,7 +14,7 @@ import { EventService, IEvent } from './shared/index';
         .error ::-ms-input-placeholder { color: #999 }
   `]
 })
-export class EventCreateComponent implements OnInit {    
+export class EventCreateComponent implements OnInit {
     isDirty: boolean = true;
 
     constructor(private router: Router, private eventService: EventService) {
@@ -22,13 +22,14 @@ export class EventCreateComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        
+
     }
 
     saveEvent(event: IEvent): void {
-        this.eventService.saveEvent(event);
-        this.isDirty = false;
-        this.router.navigate(['/events']);
+        this.eventService.saveEvent(event).subscribe(event => {
+            this.isDirty = false;
+            this.router.navigate(['/events']);
+        });
     }
 
     cancel(): void {

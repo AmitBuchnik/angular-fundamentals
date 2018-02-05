@@ -1,12 +1,12 @@
 import { Injectable, EventEmitter } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Subject, Observable } from 'rxjs/RX';
 
 import { IEvent, ISession } from "./index";
 
 @Injectable()
 export class EventService {
-    constructor(private http: Http) {        
+    constructor(private http: Http) {
     }
 
     getEvents(): Observable<IEvent[]> {
@@ -28,10 +28,13 @@ export class EventService {
         }).catch(this.handleError);
     }
 
-    saveEvent(event: IEvent): void {
-        event.id = 999;
-        event.sessions = [];
-        EVENTS.push(event);
+    saveEvent(event: IEvent): Observable<IEvent> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post("api/events", JSON.stringify(event), options)
+            .map((response: Response) => response.json)
+            .catch(this.handleError);
     }
 
     updateEvent(event: IEvent): void {
