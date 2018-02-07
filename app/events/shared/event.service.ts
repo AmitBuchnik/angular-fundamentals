@@ -37,33 +37,39 @@ export class EventService {
             .catch(this.handleError);
     }
 
-    searchSessions(searchTerm: string): Observable<ISession[]> {
-        let term = searchTerm.toLocaleLowerCase();
-        let results: ISession[] = [];
+    searchSessions(searchTerm: string) {
+        return this.http.get("/api/sessions/search?search=" + searchTerm).map((response: Response) => {
+            return response.json();
+        }).catch(this.handleError);
 
-        EVENTS.forEach(event => {
-            let matchingSessions = event.sessions.filter(session =>
-                session.name.toLocaleLowerCase().indexOf(term) > -1);
+        // let term = searchTerm.toLocaleLowerCase();
+        // let results: ISession[] = [];
 
-            matchingSessions = matchingSessions.map((session: any) => {
-                session.eventId = event.id;
-                return session;
-            });
-            results = results.concat(matchingSessions);
-        });
+        // EVENTS.forEach(event => {
+        //     let matchingSessions = event.sessions.filter(session =>
+        //         session.name.toLocaleLowerCase().indexOf(term) > -1);
 
-        let emitter = new EventEmitter<ISession[]>(true);
-        setTimeout(() => {
-            emitter.emit(results);
-        }, 100);
-        return emitter;
+        //     matchingSessions = matchingSessions.map((session: any) => {
+        //         session.eventId = event.id;
+        //         return session;
+        //     });
+        //     results = results.concat(matchingSessions);
+        // });
 
-        // let subject = new Subject<ISession[]>();
+        // let emitter = new EventEmitter<ISession[]>(true);
         // setTimeout(() => {
-        //     subject.next(results);
-        //     subject.complete();
+        //     emitter.emit(results);
         // }, 100);
-        // return subject;
+        // return emitter;
+
+        /*
+        let subject = new Subject<ISession[]>();
+        setTimeout(() => {
+            subject.next(results);
+            subject.complete();
+        }, 100);
+        return subject;
+        */
     }
 
     handleError(error: Response) {
