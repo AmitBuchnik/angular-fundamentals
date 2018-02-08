@@ -33,7 +33,7 @@ export class EventService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post("api/events", JSON.stringify(event), options)
-            .map((response: Response) => response.json)
+            .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
