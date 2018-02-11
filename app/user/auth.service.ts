@@ -15,7 +15,7 @@ export class AuthService {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
-        let options = new RequestOptions({ 'headers': headers });
+        let options = new RequestOptions({ headers: headers });
         let logInfo = { username: userName, password: password };
 
         return this.http.post('/api/login', JSON.stringify(logInfo), options)
@@ -33,9 +33,45 @@ export class AuthService {
         return !!this.currentUser;
     }
 
-    updateCurrentUser(firstName: string, lastName: string): void {
+    checkAuthenticationStatus() {
+        return this.http.get('/api/currentidentity').map((response: any) => {
+            if (response._body) {
+                return response.json();
+            } else {
+                return {};
+            }
+        })
+            .do(currentUser => {
+                if (!!currentUser.userName) {
+                    this.currentUser = currentUser;
+                }
+            })
+            .subscribe();
+    }
+
+    updateCurrentUser(firstName: string, lastName: string) {
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
+
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        return this.http.put(`/api/users/${this.currentUser.id}`, JSON.stringify(this.currentUser), options);
+    }
+
+    logout() {
+        this.currentUser = undefined;
+        
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+            headers: headers
+        });
+        return this.http.post(`/api/logout`, JSON.stringify({}), options);
     }
 
     handleError(response: Response) {

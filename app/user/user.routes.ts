@@ -5,5 +5,5 @@ import { LoginComponent } from './login.component';
 
 export const userRoutes: Routes = [
     { path: 'profile', component: ProfileComponent }, // user/profile
-    { path: 'login', component: LoginComponent } // user/profile
+    { path: 'login', component: LoginComponent } // user/login
 ];
