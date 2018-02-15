@@ -25,6 +25,7 @@ export class VoterService {
 
     deleteVoter(eventId: number, session: ISession, voterName: string): void {
         session.voters = session.voters.filter(voter => voter !== voterName);
+        
         this.http.delete(`api/events/${eventId}/sessions/${session.id}/voters/${voterName}`)
             .catch(this.handleError)
             .subscribe();
