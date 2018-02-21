@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { IToastr, TOASTR_TOKEN } from '../common/toastr.service';
 import { AuthService } from './auth.service';
-import { TOASTR_TOKEN, IToastr } from '../common/toastr.service';
 
 @Component({
   templateUrl: 'app/user/profile.component.html',
@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService,
     private router: Router,
     @Inject(TOASTR_TOKEN) private toastr: IToastr) {
-
   }
 
   ngOnInit(): void {
@@ -54,7 +53,7 @@ export class ProfileComponent implements OnInit {
   logout(): void {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['/user/login']);
-    })
+    });
   }
 
   validateFirstName(): boolean {

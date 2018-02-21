@@ -25,7 +25,7 @@ export class EventDetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        //this.event = this.eventservice.getEvent(+this.route.snapshot.params['id']);
+        // this.event = this.eventservice.getEvent(+this.route.snapshot.params['id']);
 
         // this.route.params.subscribe((params: Params) => {       
         //     // this.eventservice.getEvent(+params['id']).subscribe((event: IEvent) => {
@@ -41,7 +41,7 @@ export class EventDetailsComponent implements OnInit {
         //     });
         // });
 
-        this.route.data.subscribe(data => {
+        this.route.data.subscribe((data) => {
             this.event = data['event'];
             this.addMode = false;
         });
@@ -52,7 +52,7 @@ export class EventDetailsComponent implements OnInit {
     }
 
     saveNewSession(session: ISession): void {
-        const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
+        const nextId = Math.max.apply(null, this.event.sessions.map((s) => s.id));
         session.id = nextId + 1;
         this.event.sessions.push(session);
         this.eventservice.saveEvent(this.event).subscribe();

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 
-import { EventService } from "../shared/event.service";
-import { EventCreateComponent } from "../event-create.component";
+import { EventService } from '../shared/event.service';
+import { EventCreateComponent } from '../event-create.component';
 
 @Injectable()
 export class EventRouteActivator implements /* CanActivate, */ CanDeactivate<EventCreateComponent> {

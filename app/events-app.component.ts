@@ -5,14 +5,14 @@ import { AuthService } from './user/auth.service';
     selector: 'events-app',
     template: `
         <nav-bar></nav-bar>
-        <router-outlet></router-outlet> 
-    `
+        <router-outlet></router-outlet>
+    `,
 })
-export class EventsAppComponent implements OnInit {    
-    constructor(private authService: AuthService){
+export class EventsAppComponent implements OnInit {
+    constructor(private authService: AuthService) {
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.authService.checkAuthenticationStatus();
     }
 }

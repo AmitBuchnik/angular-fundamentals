@@ -12,7 +12,7 @@ describe('VoterService', () => {
 
     describe('deleteVoter', () => {
         it('should remove the voter from the list of voters', () => {
-            var session = { id: 6, voters: ['puptiz', 'david'] };
+            const session = { id: 6, voters: ['puptiz', 'david'] };
             mockHttp.delete.and.returnValue(Observable.of(false));
 
             voterService.deleteVoter(1, <ISession>session, 'puptiz');
@@ -22,7 +22,7 @@ describe('VoterService', () => {
         });
 
         it('should call http.delete with the right URL', () => {
-            var session = { id: 6, voters: ['puptiz', 'david'] };
+            const session = { id: 6, voters: ['puptiz', 'david'] };
             mockHttp.delete.and.returnValue(Observable.of(false));
 
             voterService.deleteVoter(1, <ISession>session, 'puptiz');
@@ -33,12 +33,12 @@ describe('VoterService', () => {
 
     describe('addVoter', () => {
         it('should call http.post with the right URL', () => {
-            var session = { id: 6, voters: ['puptiz'] };
+            const session = { id: 6, voters: ['puptiz'] };
             mockHttp.post.and.returnValue(Observable.of(false));
 
             voterService.addVoter(1, <ISession>session, 'david');
 
-            expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, "{}", jasmine.any(Object));
+            expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, '{}', jasmine.any(Object));
         });
     });
 });

@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
     templateUrl: 'app/user/login.component.html',
     styles: [`
         em { float: right; color: #E05C65; padding-left: 10px;}
-    `]
+    `],
 })
 export class LoginComponent {
     loginInvalid: boolean = false;
@@ -17,7 +17,7 @@ export class LoginComponent {
 
     login(formValues): void {
         this.authSerivce.loginUser(formValues.userName, formValues.password)
-            .subscribe(response => {
+            .subscribe((response) => {
                 if (!response) {
                     this.loginInvalid = true;
                 } else {

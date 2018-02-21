@@ -12,11 +12,11 @@ export class VoterService {
     addVoter(eventId: number, session: ISession, voterName: string): void {
         session.voters.push(voterName);
 
-        let headers = new Headers({
+        const headers = new Headers({
             'Content-Type': 'application/json'
         });
-        let options = new RequestOptions({ headers: headers });
-        let url = `api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
+        const options = new RequestOptions({ headers: headers });
+        const url = `api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
 
         this.http.post(url, JSON.stringify({}), options)
             .catch(this.handleError)
@@ -24,7 +24,7 @@ export class VoterService {
     }
 
     deleteVoter(eventId: number, session: ISession, voterName: string): void {
-        session.voters = session.voters.filter(voter => voter !== voterName);
+        session.voters = session.voters.filter((voter) => voter !== voterName);
         
         this.http.delete(`api/events/${eventId}/sessions/${session.id}/voters/${voterName}`)
             .catch(this.handleError)
@@ -32,7 +32,7 @@ export class VoterService {
     }
 
     userHasVoted(session: ISession, voterName: string): boolean {
-        return session.voters.some(voter => voter === voterName);
+        return session.voters.some((voter) => voter === voterName);
     }
 
     handleError(error: Response) {
