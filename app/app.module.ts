@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import { EventsAppComponent } from './events-app.component';
 
@@ -48,7 +48,7 @@ declare let jQuery: object;
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }) // optimistic bundle download (when ready)
     ],
     declarations: [
         EventsAppComponent,
