@@ -50,12 +50,15 @@ import { IEvent } from './index';
             <!-- <button class='btn btn-primary' (click)='handleClickMe()'>Click me</button> -->
         </div>
     `,
-    styleUrls: ['app/events/event-thumbnail.component.css']
+    // styleUrls: ['app/events/event-thumbnail.component.css']
 
-    // styles: [`
-    //     .pad-left { margin-left: 10px; }
-    //     .well div { color: #bbb; }
-    // `]
+    styles: [`
+        .thumbnail { min-height: 210px; }
+        .pad-left { margin-left: 10px; }
+        .well div { color: #bbb; }
+        .green { color: #003300 !important; }
+        .bold { font-weight: bold; }
+    `]
 })
 export class EventThumbnailComponent implements OnChanges {
     @Input() event: IEvent;
