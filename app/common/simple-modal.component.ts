@@ -28,14 +28,14 @@ import { JQUERY_TOKEN } from './index';
 export class SimpleModalComponent {
     @Input() elementId: string;
     @Input() title: string;
-    @Input() closeOnBodyClock: string;
+    @Input() closeOnBodyClick: string;
     @ViewChild('modalcontainer') containerEl: ElementRef;
 
     constructor( @Inject(JQUERY_TOKEN) private $: any) {
     }
 
     closeModal(): void {
-        if (this.closeOnBodyClock.toLocaleLowerCase() === 'true') {
+        if (this.closeOnBodyClick.toLocaleLowerCase() === 'true') {
             // this.$(`#${this.elementId}`).modal('hide');
             this.$(this.containerEl.nativeElement).modal('hide');
         }    
