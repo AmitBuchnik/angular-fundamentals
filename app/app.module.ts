@@ -68,18 +68,18 @@ let jQuery: object = window['$'];
         LocationValidator,
     ],
     providers: [
-        EventService,
+        EventService,        
+        EventRouteActivator,
+        EventResolver,        
+        AuthService,
+        VoterService,
         { provide: TOASTR_TOKEN, useValue: toastr },
         { provide: JQUERY_TOKEN, useValue: jQuery },
-        EventRouteActivator,
-        EventResolver,
+        { provide: EventsListResolver, useClass: EventsListResolver },
         // {
         //     provide: 'canDeactivateCreateEvent',
         //     useValue: checkDirtyState
         // }
-        { provide: EventsListResolver, useClass: EventsListResolver },
-        AuthService,
-        VoterService,
     ],
     bootstrap: [EventsAppComponent],
 })
