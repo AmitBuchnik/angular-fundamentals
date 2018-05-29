@@ -39,8 +39,8 @@ import { NavbarComponent } from './nav/navbar.component';
 import { appRoutes } from './routes';
 import { AuthService } from './user/auth.service';
 
-declare let toastr: IToastr;
-declare let jQuery: object;
+let toastr: IToastr = window['toastr'];
+let jQuery: object = window['$'];
 
 @NgModule({
     imports: [
