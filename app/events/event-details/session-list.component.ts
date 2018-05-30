@@ -16,8 +16,7 @@ export class SessionListComponent implements OnChanges {
     visibleSessions: ISession[] = [];
 
     constructor(private voterService: VoterService,
-        private authService: AuthService) {
-
+        public authService: AuthService) {
     }
 
     ngOnChanges(): void {

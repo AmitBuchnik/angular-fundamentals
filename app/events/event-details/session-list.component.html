@@ -4,7 +4,8 @@
         <div *ngIf="authService.isAuthenticated()">
             <upvote (vote)="toggleVote(session)"
                 [count]="session.voters.length"
-                [voted]="userHasVoted(session)"></upvote>
+                [voted]="userHasVoted(session)">
+            </upvote>
         </div>
     </div>
     <div class="col-md-10">
@@ -13,7 +14,7 @@
                 {{ session.name }}
                 <i *ngIf="session.voters.length > 3"
                     class="glyphicon glyphicon-fire"
-                    style="color: yellow;"></i>
+                    style="color: red;"></i>
             </div>
             <div well-body>
                 <h6>{{session.presenter}}</h6>
