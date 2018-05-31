@@ -22,7 +22,7 @@ export class EventRouteActivator implements /* CanActivate, */ CanDeactivate<Eve
 
     canDeactivate(component: EventCreateComponent): boolean {
         if (component.isDirty) {
-            return false;
+            return window.confirm(`You have not saved this event, do you want to cancel?`);
         }
         return true;
     }

@@ -122,6 +122,6 @@
             class="btn btn-primary">Save</button>
         <button type="button"
             class="btn btn-default"
-            (click)="cancel()">Cancel</button>
+            (click)="cancel(newEventForm.invalid && newEventForm.touched)">Cancel</button>
     </form>
 </div>

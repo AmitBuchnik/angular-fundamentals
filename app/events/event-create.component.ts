@@ -30,7 +30,8 @@ export class EventCreateComponent implements OnInit {
         });
     }
 
-    cancel(): void {
+    cancel(isInvalid: boolean): void {
+        this.isDirty = isInvalid;
         this.router.navigate(['/events']);
     }
 }
