@@ -24,7 +24,7 @@ export class EventService {
 
         return this.http.get('/api/events').map((response: Response) => {
             return <IEvent[]>response.json();
-        }).pipe(catchError(this.genericHandleError<IEvent[]>('getEvents', [])));
+        }).pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
     }
 
     getEvent(id: number): Observable<IEvent> {
@@ -34,22 +34,30 @@ export class EventService {
     
         return this.http.get('/api/events/' + id).map((response: Response) => {
             return <IEvent>response.json();
-        }).pipe(catchError(this.genericHandleError<IEvent>('getEvent')));
+        }).pipe(catchError(this.handleError<IEvent>('getEvent')));
     }
 
     saveEvent(event: IEvent): Observable<IEvent> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
 
+        // return this.http.post('api/events', JSON.stringify(event), options)
+        //     .map((response: Response) => response.json())
+        //     .catch(this.handleError);
+    
         return this.http.post('api/events', JSON.stringify(event), options)
             .map((response: Response) => response.json())
-            .catch(this.handleError);
+            .pipe(catchError(this.handleError<IEvent>('saveEvent')));
     }
 
     searchSessions(searchTerm: string) {
+        // return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
+        //     return response.json();
+        // }).catch(this.handleError);
+
         return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
             return response.json();
-        }).catch(this.handleError);
+        }).pipe(catchError(this.handleError<string>('searchSessions')));
 
         // let term = searchTerm.toLocaleLowerCase();
         // let results: ISession[] = [];
@@ -81,11 +89,11 @@ export class EventService {
         */
     }
 
-    handleError(error: Response) {
-        return Observable.throw(error.statusText);
-    }
+    // handleError(error: Response) {
+    //     return Observable.throw(error.statusText);
+    // }
 
-    private genericHandleError<T>(opertaion = 'operation', result?: T) {
+    private handleError<T>(opertaion = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);
             return Observable.of(result as T);
