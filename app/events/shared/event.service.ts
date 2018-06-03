@@ -16,48 +16,39 @@ export class EventService {
         //     subject.next(EVENTS);
         //     subject.complete();
         // }, 100);
-        // return subject;
-
-        // return this.http.get('/api/events').map((response: Response) => {
-        //     return <IEvent[]>response.json();
-        // }).catch(this.handleError);
+        // return subject;     
 
         return this.http.get('/api/events').map((response: Response) => {
             return <IEvent[]>response.json();
-        }).pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+        })
+        // .catch(this.handleError);   
+        .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
     }
 
-    getEvent(id: number): Observable<IEvent> {
-        // return this.http.get('/api/events/' + id).map((response: Response) => {
-        //     return <IEvent>response.json();
-        // }).catch(this.handleError);
-    
+    getEvent(id: number): Observable<IEvent> {    
         return this.http.get('/api/events/' + id).map((response: Response) => {
             return <IEvent>response.json();
-        }).pipe(catchError(this.handleError<IEvent>('getEvent')));
+        })
+        // .catch(this.handleError);
+        .pipe(catchError(this.handleError<IEvent>('getEvent')));
     }
 
     saveEvent(event: IEvent): Observable<IEvent> {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
-
-        // return this.http.post('api/events', JSON.stringify(event), options)
-        //     .map((response: Response) => response.json())
-        //     .catch(this.handleError);
     
         return this.http.post('api/events', JSON.stringify(event), options)
             .map((response: Response) => response.json())
+            // .catch(this.handleError);
             .pipe(catchError(this.handleError<IEvent>('saveEvent')));
     }
 
     searchSessions(searchTerm: string) {
-        // return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
-        //     return response.json();
-        // }).catch(this.handleError);
-
         return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
             return response.json();
-        }).pipe(catchError(this.handleError<string>('searchSessions')));
+        })
+        // .catch(this.handleError);
+        .pipe(catchError(this.handleError<string>('searchSessions')));
 
         // let term = searchTerm.toLocaleLowerCase();
         // let results: ISession[] = [];
