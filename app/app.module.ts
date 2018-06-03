@@ -7,6 +7,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 
 import { EventsAppComponent } from './events-app.component';
+import { Error404Component } from './errors/404.component';
+import { NavbarComponent } from './nav/navbar.component';
+import { appRoutes } from './routes';
+import { AuthService } from './user/auth.service';
 
 import {
     CreateSessionComponent,
@@ -33,11 +37,6 @@ import {
     SimpleModalComponent,
     TOASTR_TOKEN,
 } from './common/index';
-
-import { Error404Component } from './errors/404.component';
-import { NavbarComponent } from './nav/navbar.component';
-import { appRoutes } from './routes';
-import { AuthService } from './user/auth.service';
 
 let toastr: IToastr = window['toastr'];
 let jQuery: object = window['$'];
