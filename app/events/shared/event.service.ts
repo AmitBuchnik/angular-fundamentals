@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 
 import { IEvent, ISession } from './index';
 
@@ -17,15 +18,23 @@ export class EventService {
         // }, 100);
         // return subject;
 
+        // return this.http.get('/api/events').map((response: Response) => {
+        //     return <IEvent[]>response.json();
+        // }).catch(this.handleError);
+
         return this.http.get('/api/events').map((response: Response) => {
             return <IEvent[]>response.json();
-        }).catch(this.handleError);
+        }).pipe(catchError(this.handleErrorGeneric<IEvent[]>('getEvents', [])));
     }
 
     getEvent(id: number): Observable<IEvent> {
+        // return this.http.get('/api/events/' + id).map((response: Response) => {
+        //     return <IEvent>response.json();
+        // }).catch(this.handleError);
+    
         return this.http.get('/api/events/' + id).map((response: Response) => {
             return <IEvent>response.json();
-        }).catch(this.handleError);
+        }).pipe(catchError(this.handleErrorGeneric<IEvent>('getEvent')));
     }
 
     saveEvent(event: IEvent): Observable<IEvent> {
@@ -74,6 +83,13 @@ export class EventService {
 
     handleError(error: Response) {
         return Observable.throw(error.statusText);
+    }
+
+    private handleErrorGeneric<T>(opertaion = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return Observable.of(result as T);
+        };
     }
 }
 
