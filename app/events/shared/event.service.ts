@@ -24,7 +24,7 @@ export class EventService {
 
         return this.http.get('/api/events').map((response: Response) => {
             return <IEvent[]>response.json();
-        }).pipe(catchError(this.handleErrorGeneric<IEvent[]>('getEvents', [])));
+        }).pipe(catchError(this.genericHandleError<IEvent[]>('getEvents', [])));
     }
 
     getEvent(id: number): Observable<IEvent> {
@@ -34,7 +34,7 @@ export class EventService {
     
         return this.http.get('/api/events/' + id).map((response: Response) => {
             return <IEvent>response.json();
-        }).pipe(catchError(this.handleErrorGeneric<IEvent>('getEvent')));
+        }).pipe(catchError(this.genericHandleError<IEvent>('getEvent')));
     }
 
     saveEvent(event: IEvent): Observable<IEvent> {
@@ -85,7 +85,7 @@ export class EventService {
         return Observable.throw(error.statusText);
     }
 
-    private handleErrorGeneric<T>(opertaion = 'operation', result?: T) {
+    private genericHandleError<T>(opertaion = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);
             return Observable.of(result as T);
