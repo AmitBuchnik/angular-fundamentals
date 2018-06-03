@@ -8,7 +8,6 @@ import { IEvent } from './index';
 @Injectable()
 export class EventsListResolver implements Resolve<any> {
     constructor(private eventService: EventService) {
-
     }
 
     resolve(): Observable<IEvent[]> {
