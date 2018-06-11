@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 
@@ -37,7 +38,7 @@ export class VoterService {
         session.voters = session.voters.filter((voter) => voter !== voterName);
         
         const url = `api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
-        
+
         this.http.delete(url)
             .pipe(catchError(this.handleError('deleteVoter')))
             .subscribe();

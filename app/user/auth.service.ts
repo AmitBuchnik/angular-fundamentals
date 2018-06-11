@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
+import { tap, catchError } from 'rxjs/operators';
 
 import { IUser } from './user.model';
 
@@ -8,25 +11,34 @@ import { IUser } from './user.model';
 export class AuthService {
     currentUser: IUser;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     loginUser(userName: string, password: string) {
-        const headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-        const options = new RequestOptions({ headers: headers });
+        // const headers = new Headers({
+        //     'Content-Type': 'application/json'
+        // });
+        // const options = new RequestOptions({ headers: headers });
+        // const logInfo = { username: userName, password: password };
+
+        // return this.http.post('/api/login', JSON.stringify(logInfo), options)
+        //     .do((response) => {
+        //         if (response) {
+        //             this.currentUser = response.json().user as IUser;
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         return Observable.of(false);
+        //     });
+
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         const logInfo = { username: userName, password: password };
 
-        return this.http.post('/api/login', JSON.stringify(logInfo), options)
-            .do((response) => {
-                if (response) {
-                    this.currentUser = response.json().user as IUser;
-                }
-            })
-            .catch((error) => {
-                return Observable.of(false);
-            });
+        return this.http.post('/api/login', logInfo, options)
+            .pipe(tap(data => {
+                this.currentUser = data['user'] as IUser;
+            }))
+            .pipe(catchError(this.handleError('loginUser')));
     }
 
     isAuthenticated(): boolean {
@@ -53,28 +65,37 @@ export class AuthService {
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
 
-        const headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-        const options = new RequestOptions({
-            headers: headers
-        });
-        return this.http.put(`/api/users/${this.currentUser.id}`, JSON.stringify(this.currentUser), options);
+        // const headers = new Headers({
+        //     'Content-Type': 'application/json'
+        // });
+        // const options = new RequestOptions({
+        //     headers: headers
+        // });
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.put(`/api/users/${this.currentUser.id}`, this.currentUser, options);
     }
 
     logout() {
         this.currentUser = undefined;
 
-        const headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-        const options = new RequestOptions({
-            headers: headers
-        });
-        return this.http.post(`/api/logout`, JSON.stringify({}), options);
+        // const headers = new Headers({
+        //     'Content-Type': 'application/json'
+        // });
+        // const options = new RequestOptions({
+        //     headers: headers
+        // });
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.http.post(`/api/logout`, {}, options);
     }
 
-    handleError(response: Response) {
-        return Observable.throw(response.statusText);
+    // handleError(response: Response) {
+    //     return Observable.throw(response.statusText);
+    // }
+
+    private handleError<T>(opertaion = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return Observable.of(result as T);
+        };
     }
 }
