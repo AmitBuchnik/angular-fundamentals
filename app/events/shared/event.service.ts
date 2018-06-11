@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+// import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
@@ -55,7 +55,7 @@ export class EventService {
             .pipe(catchError(this.handleError<IEvent>('saveEvent')));
     }
 
-    searchSessions(searchTerm: string) {
+    searchSessions(searchTerm: string): Observable<ISession[]> {
         // let term = searchTerm.toLocaleLowerCase();
         // let results: ISession[] = [];
 
@@ -83,11 +83,14 @@ export class EventService {
         // }, 100);
         // return subject;       
 
-        return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
-            return response.json();
-        })
-            // .catch(this.handleError);
-            .pipe(catchError(this.handleError<string>('searchSessions')));
+        // return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
+        //     return response.json();
+        // })
+        //     // .catch(this.handleError);
+        //     .pipe(catchError(this.handleError<string>('searchSessions')));
+
+        return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+            .pipe(catchError(this.handleError<ISession[]>('searchSessions')));
     }
 
     // handleError(error: Response) {
