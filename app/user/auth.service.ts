@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { tap, catchError } from 'rxjs/operators';
 
 import { IUser } from './user.model';
@@ -14,12 +15,12 @@ export class AuthService {
     constructor(private http: HttpClient) {
     }
 
-    loginUser(userName: string, password: string) {
+    loginUser(userName: string, password: string): Observable<boolean | object> {
         // const headers = new Headers({
         //     'Content-Type': 'application/json'
         // });
         // const options = new RequestOptions({ headers: headers });
-        // const logInfo = { username: userName, password: password };
+        // const logInfo = { usernaAme: userName, password: password };
 
         // return this.http.post('/api/login', JSON.stringify(logInfo), options)
         //     .do((response) => {
@@ -38,7 +39,9 @@ export class AuthService {
             .pipe(tap(data => {
                 this.currentUser = data['user'] as IUser;
             }))
-            .pipe(catchError(this.handleError('loginUser')));
+            .pipe(catchError(error => {
+                return of(false);
+            }));
     }
 
     isAuthenticated(): boolean {
