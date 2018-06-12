@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../user/auth.service';
-import { ISession, EventService } from '../events/index';
+import { ISession, EventService, IEvent } from '../events/index';
 
 @Component({
     selector: 'nav-bar',
@@ -13,12 +13,17 @@ import { ISession, EventService } from '../events/index';
         li > a.active { color: #f97924; }
     `]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {    
     searchTerm: string = '';
+    events: IEvent[];
     foundSessions: ISession[];
 
     constructor(private authService: AuthService,
         private eventService: EventService) {
+    }
+
+    ngOnInit(): void {
+        this.eventService.getEvents().subscribe(events => { this.events = events; });
     }
 
     searchSessions(searchTerm: string): void {
