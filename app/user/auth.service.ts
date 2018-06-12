@@ -49,18 +49,26 @@ export class AuthService {
     }
 
     checkAuthenticationStatus() {
-        return this.http.get('/api/currentidentity').map((response: any) => {
-            if (response._body) {
-                return response.json();
-            } else {
-                return {};
-            }
-        })
-            .do((currentUser) => {
-                if (!!currentUser.userName) {
-                    this.currentUser = currentUser;
+        // return this.http.get('/api/currentidentity').map((response: any) => {
+        //     if (response._body) {
+        //         return response.json();
+        //     } else {
+        //         return {};
+        //     }
+        // })
+        //     .do((currentUser) => {
+        //         if (!!currentUser.userName) {
+        //             this.currentUser = currentUser;
+        //         }
+        //     })
+        //     .subscribe();
+
+        return this.http.get('/api/currentidentity')
+            .pipe(tap(data => {
+                if (data instanceof Object) {
+                    this.currentUser = data as IUser;
                 }
-            })
+            }))
             .subscribe();
     }
 
