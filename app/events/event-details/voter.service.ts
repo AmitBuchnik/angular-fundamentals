@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 
 import { ISession } from '../index';
+import { handleError } from '../../common/index';
 
 @Injectable()
 export class VoterService {
@@ -30,7 +31,7 @@ export class VoterService {
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         this.http.post(url, {}, options)
-            .pipe(catchError(this.handleError('addVoter')))
+            .pipe(catchError(handleError('addVoter')))
             .subscribe();
     }
 
@@ -40,7 +41,7 @@ export class VoterService {
         const url = `api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
 
         this.http.delete(url)
-            .pipe(catchError(this.handleError('deleteVoter')))
+            .pipe(catchError(handleError('deleteVoter')))
             .subscribe();
     }
 
@@ -52,10 +53,10 @@ export class VoterService {
     //     return Observable.throw(error.statusText);
     // }
 
-    private handleError<T>(opertaion = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            return Observable.of(result as T);
-        };
-    }
+    // private handleError<T>(opertaion = 'operation', result?: T) {
+    //     return (error: any): Observable<T> => {
+    //         console.error(error);
+    //         return Observable.of(result as T);
+    //     };
+    // }
 }

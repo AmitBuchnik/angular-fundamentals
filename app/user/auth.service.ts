@@ -7,6 +7,7 @@ import { of } from 'rxjs/observable/of';
 import { tap, catchError } from 'rxjs/operators';
 
 import { IUser } from './user.model';
+import { handleError } from '../common/index';
 
 @Injectable()
 export class AuthService {
@@ -103,10 +104,10 @@ export class AuthService {
     //     return Observable.throw(response.statusText);
     // }
 
-    private handleError<T>(opertaion = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            return Observable.of(result as T);
-        };
-    }
+    // private handleError<T>(opertaion = 'operation', result?: T) {
+    //     return (error: any): Observable<T> => {
+    //         console.error(error);
+    //         return Observable.of(result as T);
+    //     };
+    // }
 }

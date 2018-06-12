@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 
 import { IEvent, ISession } from './index';
+import { handleError } from '../../common/index';
 
 @Injectable()
 export class EventService {
@@ -22,22 +23,22 @@ export class EventService {
         // return this.http.get('/api/events').map((response: Response) => {
         //     return <IEvent[]>response.json();
         // })
-        // // .catch(this.handleError);   
-        // .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+        // // .catch(handleError);   
+        // .pipe(catchError(handleError<IEvent[]>('getEvents', [])));
 
         return this.http.get<IEvent[]>('/api/events')
-            .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+            .pipe(catchError(handleError<IEvent[]>('getEvents', [])));
     }
 
     getEvent(id: number): Observable<IEvent> {
         // return this.http.get('/api/events/' + id).map((response: Response) => {
         //     return <IEvent>response.json();
         // })
-        // // .catch(this.handleError);
-        // .pipe(catchError(this.handleError<IEvent>('getEvent')));
+        // // .catch(handleError);
+        // .pipe(catchError(handleError<IEvent>('getEvent')));
 
         return this.http.get<IEvent>('/api/events/' + id)
-            .pipe(catchError(this.handleError<IEvent>('getEvent')));
+            .pipe(catchError(handleError<IEvent>('getEvent')));
     }
 
     saveEvent(event: IEvent): Observable<IEvent> {
@@ -46,13 +47,13 @@ export class EventService {
 
         // return this.http.post('api/events', JSON.stringify(event), options)
         //     .map((response: Response) => response.json())
-        //     // .catch(this.handleError);
-        //     .pipe(catchError(this.handleError<IEvent>('saveEvent')));
+        //     // .catch(handleError);
+        //     .pipe(catchError(handleError<IEvent>('saveEvent')));
 
         const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         return this.http.post<IEvent>('api/events', JSON.stringify(event), options)
-            .pipe(catchError(this.handleError<IEvent>('saveEvent')));
+            .pipe(catchError(handleError<IEvent>('saveEvent')));
     }
 
     searchSessions(searchTerm: string): Observable<ISession[]> {
@@ -86,23 +87,23 @@ export class EventService {
         // return this.http.get('/api/sessions/search?search=' + searchTerm).map((response: Response) => {
         //     return response.json();
         // })
-        //     // .catch(this.handleError);
-        //     .pipe(catchError(this.handleError<string>('searchSessions')));
+        //     // .catch(handleError);
+        //     .pipe(catchError(handleError<string>('searchSessions')));
 
         return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm)
-            .pipe(catchError(this.handleError<ISession[]>('searchSessions')));
+            .pipe(catchError(handleError<ISession[]>('searchSessions')));
     }
 
     // handleError(error: Response) {
     //     return Observable.throw(error.statusText);
     // }
 
-    private handleError<T>(opertaion = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            return Observable.of(result as T);
-        };
-    }
+    // private handleError<T>(opertaion = 'operation', result?: T) {
+    //     return (error: any): Observable<T> => {
+    //         console.error(error);
+    //         return Observable.of(result as T);
+    //     };
+    // }
 }
 
 const EVENTS: IEvent[] = [
