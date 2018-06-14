@@ -40,7 +40,7 @@ describe('VoterService', () => {
             // mockHttp.post.and.returnValue(Observable.of(false));
 
             voterService.addVoter(1, <ISession>session, 'david');
-            expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, '{}', jasmine.any(Object));
+            expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, {}, jasmine.any(Object));
         });
     });
 });
