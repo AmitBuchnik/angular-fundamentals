@@ -15,7 +15,8 @@ describe('VoterService', () => {
     describe('deleteVoter', () => {
         it('should remove the voter from the list of voters', () => {
             const session = { id: 6, voters: ['puptiz', 'david'] };
-            mockHttp.delete.and.returnValue(Observable.of(false));
+            mockHttp.delete.and.returnValue(of(false));
+            // mockHttp.delete.and.returnValue(Observable.of(false));
 
             voterService.deleteVoter(1, <ISession>session, 'puptiz');
             expect(session.voters.length).toBe(1);
