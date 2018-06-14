@@ -36,7 +36,8 @@ describe('VoterService', () => {
     describe('addVoter', () => {
         it('should call http.post with the right URL', () => {
             const session = { id: 6, voters: ['puptiz'] };
-            mockHttp.post.and.returnValue(Observable.of(false));
+            mockHttp.post.and.returnValue(of(false));
+            // mockHttp.post.and.returnValue(Observable.of(false));
 
             voterService.addVoter(1, <ISession>session, 'david');
             expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, '{}', jasmine.any(Object));
