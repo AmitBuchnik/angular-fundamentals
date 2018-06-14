@@ -30,10 +30,13 @@ module.exports = function (config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
-
+      
       // RxJs
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
+
+      // tslib
+      { pattern: 'node_modules/tslib/**/*.js', included: false, watched: false },      
 
       // Paths loaded via module imports:
       // Angular itself
