@@ -18,7 +18,6 @@ describe('VoterService', () => {
             mockHttp.delete.and.returnValue(Observable.of(false));
 
             voterService.deleteVoter(1, <ISession>session, 'puptiz');
-
             expect(session.voters.length).toBe(1);
             expect(session.voters[0]).toBe('david');
         });
