@@ -1,6 +1,8 @@
 import { VoterService } from './voter.service';
 import { ISession } from '../shared/event.model';
+
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 describe('VoterService', () => {
     let voterService: VoterService, mockHttp;
@@ -23,10 +25,10 @@ describe('VoterService', () => {
 
         it('should call http.delete with the right URL', () => {
             const session = { id: 6, voters: ['puptiz', 'david'] };
-            mockHttp.delete.and.returnValue(Observable.of(false));
+            mockHttp.delete.and.returnValue(of(false));
+            // mockHttp.delete.and.returnValue(Observable.of(false));
 
             voterService.deleteVoter(1, <ISession>session, 'puptiz');
-
             expect(mockHttp.delete).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/puptiz`);
         });
     });
@@ -37,7 +39,6 @@ describe('VoterService', () => {
             mockHttp.post.and.returnValue(Observable.of(false));
 
             voterService.addVoter(1, <ISession>session, 'david');
-
             expect(mockHttp.post).toHaveBeenCalledWith(`api/events/1/sessions/6/voters/david`, '{}', jasmine.any(Object));
         });
     });
