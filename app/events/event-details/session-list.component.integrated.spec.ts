@@ -3,8 +3,8 @@ import { DebugElement, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { SessionListComponent } from './session-list.component';
-import { CollapsibleWellComponent } from '../../common/collapsible-well.component';
-import { UpvoteComponent } from './upvote.component';
+// import { CollapsibleWellComponent } from '../../common/collapsible-well.component';
+// import { UpvoteComponent } from './upvote.component';
 import { ISession } from '../shared/event.model';
 import { AuthService } from '../../user/auth.service';
 import { VoterService } from './voter.service';
