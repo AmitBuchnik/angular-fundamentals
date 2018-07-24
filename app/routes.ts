@@ -18,7 +18,11 @@ export const appRoutes: Routes = [
         component: EventCreateComponent,
         canDeactivate: [EventRouteActivator] /*canDeactivate: ['canDeactivateCreateEvent']*/
     },
-    { path: 'events', component: EventsListComponent, resolve: { events: EventsListResolver } },
+    {
+        path: 'events',
+        component: EventsListComponent,
+        resolve: { events: EventsListResolver }
+    },
     // { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
     { path: 'events/:id', component: EventDetailsComponent, resolve: { event: EventResolver} },
     { path: 'events/session/new', component: CreateSessionComponent },
