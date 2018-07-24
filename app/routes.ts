@@ -16,14 +16,19 @@ export const appRoutes: Routes = [
     {
         path: 'events/new',
         component: EventCreateComponent,
-        canDeactivate: [EventRouteActivator] /*canDeactivate: ['canDeactivateCreateEvent']*/
+        canDeactivate: [EventRouteActivator]
+        /*canDeactivate: ['canDeactivateCreateEvent']*/
     },
     {
         path: 'events',
         component: EventsListComponent,
         resolve: { events: EventsListResolver }
     },
-    // { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
+    // { 
+    //     path: 'events/:id',
+    //     component: EventDetailsComponent,
+    //     canActivate: [EventRouteActivator]
+    // },
     {
         path: 'events/:id',
         component: EventDetailsComponent,
