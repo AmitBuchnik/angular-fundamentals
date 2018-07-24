@@ -24,7 +24,11 @@ export const appRoutes: Routes = [
         resolve: { events: EventsListResolver }
     },
     // { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
-    { path: 'events/:id', component: EventDetailsComponent, resolve: { event: EventResolver} },
+    {
+        path: 'events/:id',
+        component: EventDetailsComponent,
+        resolve: { event: EventResolver }
+    },
     { path: 'events/session/new', component: CreateSessionComponent },
     { path: '404', component: Error404Component },
     { path: '', redirectTo: '/events', pathMatch: 'full' },
